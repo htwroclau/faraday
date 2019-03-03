@@ -52,14 +52,14 @@ module Adapters
           connection.in_parallel do
             resp1, streamed1 = streaming_request(connection, :get, 'stream?a=1')
             resp2, streamed2 = streaming_request(connection, :get, 'stream?b=2', chunk_size: 16 * 1024)
-            assert connection.in_parallel?
+            assert connection.parallel_manager
             assert_nil resp1.body
             assert_nil resp2.body
             assert_equal [], streamed1
             assert_equal [], streamed2
           end
         end
-        assert !connection.in_parallel?
+        assert !connection.parallel_manager
         assert_match(/Streaming .+ not yet implemented/, err)
         opts = { streaming?: false, chunk_size: 16 * 1024 }
         check_streaming_response(streamed1, opts.merge(prefix: '{"a"=>"1"}'))

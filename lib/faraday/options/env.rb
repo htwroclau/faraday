@@ -105,7 +105,7 @@ module Faraday
     end
 
     def current_body
-      !!status ? :response_body : :request_body
+      status ? :response_body : :request_body
     end
 
     def body
@@ -135,11 +135,6 @@ module Faraday
     # @return [Boolean] true if the status isn't in the set of {StatusesWithoutBody}.
     def parse_body?
       !StatusesWithoutBody.include?(status)
-    end
-
-    # @return [Boolean] true if there is a parallel_manager
-    def parallel?
-      !!parallel_manager
     end
 
     def inspect

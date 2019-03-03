@@ -163,7 +163,8 @@ module Faraday
 
         def path_match?(request_path, meta)
           if path.is_a? Regexp
-            !!(meta[:match_data] = path.match(request_path))
+            meta[:match_data] = path.match(request_path)
+            meta.key?(:match_data)
           else
             path == request_path
           end

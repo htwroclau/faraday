@@ -69,7 +69,7 @@ module Faraday
       def create_request(env)
         request = Net::HTTPGenericRequest.new \
           env[:method].to_s.upcase,    # request method
-          !!env[:body],                # is there request body
+          env[:body].nil?,             # is there request body
           env[:method] != :head,       # is there response body
           env[:url].request_uri,       # request uri path
           env[:request_headers]        # request headers

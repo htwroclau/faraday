@@ -173,12 +173,12 @@ shared_examples 'a request method' do |http_method|
         resp1 = conn.public_send(http_method, '/', payload1)
         resp2 = conn.public_send(http_method, '/', payload2)
 
-        expect(conn.in_parallel?).to be_truthy
+        expect(conn.parallel_manager).to be_truthy
         expect(resp1.body).to be_nil
         expect(resp2.body).to be_nil
       end
 
-      expect(conn.in_parallel?).to be_falsey
+      expect(conn.parallel_manager).to be_falsey
       expect(resp1&.body).to eq(payload1.to_json)
       expect(resp2&.body).to eq(payload2.to_json)
     end

@@ -11,7 +11,7 @@ module Faraday
 
         opts = {}
         if env[:url].scheme == 'https' && (ssl = env[:ssl])
-          opts[:ssl_verify_peer] = !!ssl.fetch(:verify, true)
+          opts[:ssl_verify_peer] = !ssl[:verify]
           opts[:ssl_ca_path] = ssl[:ca_path] if ssl[:ca_path]
           opts[:ssl_ca_file] = ssl[:ca_file] if ssl[:ca_file]
           opts[:client_cert] = ssl[:client_cert] if ssl[:client_cert]

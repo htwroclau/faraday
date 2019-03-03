@@ -101,7 +101,7 @@ module Faraday
       end
 
       def perform_request(env)
-        if parallel?(env)
+        if env[:parallel_manager]
           manager = env[:parallel_manager]
           manager.add do
             perform_single_request(env)
@@ -181,11 +181,6 @@ module Faraday
           errklass = Faraday::ConnectionFailed
         end
         raise errklass, msg
-      end
-
-      # @return [Boolean]
-      def parallel?(env)
-        !!env[:parallel_manager]
       end
 
       # This parallel manager is designed to start an EventMachine loop

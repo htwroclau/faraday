@@ -81,7 +81,7 @@ module Faraday
       @params.update(options.params)   if options.params
       @headers.update(options.headers) if options.headers
 
-      @manual_proxy = !!options.proxy
+      @manual_proxy = options.proxy
       @proxy = options.proxy ? ProxyOptions.from(options.proxy) : proxy_from_env(url)
       @temp_proxy = @proxy
 
@@ -350,13 +350,6 @@ module Faraday
           yield
         end
       end
-    end
-
-    # Determine if this Faraday::Connection can make parallel requests.
-    #
-    # @return [Boolean]
-    def in_parallel?
-      !!@parallel_manager
     end
 
     # Sets up the parallel manager to make a set of requests.

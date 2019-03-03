@@ -59,7 +59,7 @@ module Faraday
         yield(response_headers) if block_given?
       end
 
-      env.response.finish(env) unless env.parallel?
+      env.response.finish(env) unless env.parallel_manager
       env.response
     end
   end

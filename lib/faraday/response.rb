@@ -51,7 +51,7 @@ module Faraday
     end
 
     def finished?
-      !!env
+      env ? true : false
     end
 
     def on_complete
